@@ -1,7 +1,7 @@
 import subprocess
 import os
 from dotenv import load_dotenv
-from aicommit.src.pr_description_gen import generate_description
+from .pr_description_gen import generate_description
 from .utils import generate_commit_messages, get_diff
 
 def main():
@@ -54,9 +54,9 @@ def main():
         if confirmation == 'y':
             subprocess.run(["git", "commit", "-m", selected_message])
             print("Changes committed!")
-            # print('Start generating PR description...')
-            # generate_description()
-            # print('PR description generated successfully!')
+            print('Start generating PR description...')
+            generate_description()
+            print('PR description generated successfully!')
 
 
         else:
