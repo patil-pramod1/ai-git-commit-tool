@@ -72,7 +72,7 @@ PR Description:
         print("Error from Azure OpenAI API:", response.status_code, response.text)
         return ""
 
-if __name__ == "__main__":
+def generate_description():
     if not OPENAI_API_KEY:
         print("❌ AZURE_API_KEY not found in environment or .env file.")
         exit(1)
