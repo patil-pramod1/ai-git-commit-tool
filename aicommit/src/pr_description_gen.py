@@ -86,5 +86,13 @@ def generate_description():
 
     print("🤖 Generating PR description using GPT-4o-mini...")
     description = generate_pr_description(diff)
-    print("\n--- 📝 Generated PR Description ---\n")
-    print(description)
+    # print("\n--- 📝 Generated PR Description ---\n")
+    # print(description)
+
+    # ✅ Save to .github/PR_description.md
+    os.makedirs(".github", exist_ok=True)
+    with open(".github/PR_description.md", "w", encoding="utf-8") as f:
+        f.write(description)
+
+    print("\n💾 PR description saved to `.github/PR_description.md`")
+
