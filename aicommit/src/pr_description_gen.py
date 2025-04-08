@@ -112,5 +112,5 @@ def generate_description():
     with open(".github/PR_description.md", "w", encoding="utf-8") as f:
         f.write(description)
 
-    print("\n💾 PR description saved to `.github/PR_description.md`")
+    print("\n💾 PR description saved to `.github/PR_DESCRIPTION.md`")
 

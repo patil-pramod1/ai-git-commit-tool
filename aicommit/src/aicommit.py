@@ -1,5 +1,4 @@
 import subprocess
-import openai
 
 from .commit_impact_report import impact_report
 from .pr_description_gen import generate_description
