@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from .pr_description_gen import generate_description
 from .utils import generate_commit_messages, get_diff
+from .commit_impact_report import commit_impact_report
 
 def main():
     """
@@ -58,6 +59,7 @@ def main():
             print('Start generating PR description...')
             generate_description()
             print('PR description generated successfully!')
+            commit_impact_report()
 
 
         else:
