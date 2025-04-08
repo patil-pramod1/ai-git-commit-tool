@@ -38,5 +38,9 @@ if __name__ == "__main__":
             print("✅ PR description updated successfully.")
         else:
             print("❌ Failed to update PR description.")
+            print("🔍 Debug Info:")
+            print("PR_NUMBER:", PR_NUMBER)
+            print("REPO:", REPO)
+            print("DESCRIPTION:", description)
     else:
         print("❌ Could not retrieve PR diff.")
