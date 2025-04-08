@@ -55,9 +55,9 @@ def main():
             # generate_description()
             subprocess.run(["git", "commit", "-m", selected_message])
             print("Changes committed!")
-            # print('Start generating PR description...')
-            # generate_description()
-            # print('PR description generated successfully!')
+            print('Start generating PR description...')
+            generate_description()
+            print('PR description generated successfully!')
 
 
         else:
