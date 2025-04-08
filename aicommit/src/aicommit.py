@@ -1,5 +1,8 @@
 import subprocess
 import openai
+
+from aicommit.src.commit_impact_report import impact_report
+from aicommit.src.pr_description_gen import generate_description
 from .utils import generate_commit_messages, get_diff
 from dotenv import load_dotenv
 import os
@@ -93,5 +96,10 @@ def main():
     if confirmation == 'y':
         subprocess.run(["git", "commit", "-m", selected_message])
         print("Changes committed!")
+        print('---------------------------------------------------------------------')
+        print("Generating PR description and impact report...")
+        generate_description()
+        impact_report()
+
     else:
         print("Commit message was not used.")

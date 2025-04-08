@@ -72,7 +72,7 @@ Now provide the Impact Area Analysis Report:
         print("❌ Azure OpenAI API Error:", response.status_code, response.text)
         return ""
 
-def commit_impact_report():
+def impact_report():
     if not OPENAI_API_KEY:
         print("❌ OPENAI_API_KEY not set in .env")
         return
