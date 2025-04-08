@@ -18,34 +18,52 @@ HEADERS = {
     "api-key": OPENAI_API_KEY
 }
 
-def get_latest_commit_diff():
-    """Get file-level changes from the latest commit."""
+def get_branch_diff_against_master():
+    """Compare current branch against master and return the diff."""
     try:
         diff = subprocess.check_output(
-            ["git", "show", "HEAD", "--name-status", "--no-color"]
+            ["git", "diff", "origin/master...HEAD", "--name-status", "--no-color"]
         ).decode("utf-8")
         return diff.strip()
     except subprocess.CalledProcessError as e:
-        print("Error fetching latest commit diff:", e)
+        print("Error fetching branch diff against master:", e)
         return ""
 
-def generate_pr_description(diff_text):
-    """Generate PR description using Azure OpenAI."""
-    prompt = f"""
-You're an AI assistant that generates GitHub Pull Request descriptions.
 
-Based on the following file changes from a commit:
+def generate_pr_description(diff_text):
+    """Generate structured PR description using Azure OpenAI."""
+    prompt = f"""
+You are an expert AI assistant that writes professional and structured GitHub Pull Request descriptions.
+
+You are comparing the current branch against the `master` branch. Based on the following git diff output, generate a PR description that:
+
+- Clearly explains what was changed and why.
+- Mentions **files changed**.
+- Highlights **impacted areas or modules**.
+- Groups changes by purpose (e.g., bug fix, refactor, optimization).
+- Uses markdown formatting (e.g., bullet points, bold headers).
+- Follows the below structure:
+
+### 📝 Description
+In this PR, I [describe the main issue addressed or feature added]. The following areas were impacted:
+
+### 📁 Files Changed
+List the major files or modules that were changed and explain briefly why.
+
+### 🛠️ Impact Areas
+Explain which functionalities, APIs, or modules were affected by the changes and why.
+
+### ✅ Summary of Changes
+- [Bullet 1: Describe a fix, rename, or optimization]
+- [Bullet 2: Summarize a file refactor, logic update, or cleanup]
+- [Bullet 3: Any performance or readability improvements]
+
+Git Diff to Analyze:
 
 {diff_text}
 
-Write a clear, concise, and professional PR description that:
-- Explains the purpose of the changes.
-- Summarizes major additions/removals/updates.
-- Highlights any bug fixes, features, or refactors.
-- Uses bullet points and markdown formatting if helpful.
-- Avoids unnecessary repetition of file names.
 
-PR Description:
+Now write the PR description following the structure above.
 """
 
     payload = {
@@ -78,7 +96,7 @@ def generate_description():
         exit(1)
 
     print("🔍 Fetching latest commit changes...")
-    diff = get_latest_commit_diff()
+    diff = get_branch_diff_against_master()
 
     if not diff:
         print("⚠️ No changes found in the latest commit.")
