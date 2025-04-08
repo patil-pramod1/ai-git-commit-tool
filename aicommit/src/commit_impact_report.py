@@ -78,7 +78,7 @@ def append_to_excel_onedrive(date, username, commit_message, impact_summary):
     # upload_excel_file(access_token, output_stream.getvalue())
     
     # Local Excel file implementation in the .github folder:
-    local_excel_path = ".github/PR_Report.xlsx"
+    local_excel_path = ".github/PR_Report.csv"
     if os.path.exists(local_excel_path):
         workbook = load_workbook(local_excel_path)
     else:
