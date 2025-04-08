@@ -88,6 +88,12 @@ def commit_impact_report():
 
     if report:
         print("\n--- 🧾 Impact Area Analysis Report ---\n")
-        print(report)
+        # print(report)
+        
+        os.makedirs(".github", exist_ok=True)
+        with open(".github/IMPACT_REPORT.md", "w", encoding="utf-8") as f:
+            f.write(report)
+        
+        print("\n💾 Impact report saved to `.github/IMPACT_REPORT.md`")
     else:
         print("❌ Failed to generate impact report.")
