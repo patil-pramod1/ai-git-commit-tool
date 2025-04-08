@@ -4,7 +4,8 @@ from .utils import generate_commit_messages, get_diff
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Load environment variables from .env file
+# Load environment variables from .env file
+load_dotenv()  
 OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
 
@@ -27,7 +28,8 @@ def check_for_merge_conflicts():
             capture_output=True, text=True, check=True
         )
 
-        conflicting_files = result.stdout.strip().split('\n')
+        # Split the output by lines, ignoring empty ones
+        conflicting_files = [file.strip() for file in result.stdout.split("\n") if file.strip()]
 
         if conflicting_files:
             print("Merge conflicts detected in the following files:")
@@ -61,7 +63,6 @@ def main():
         return
 
     # Set up the API key and generate commit messages
-    OPENAI_KEY = OPENAI_KEY  # Make sure to replace this with your actual API key or load it from .env
     commit_language = "en"
 
     choices = generate_commit_messages(OPENAI_KEY, diff, commit_language)
