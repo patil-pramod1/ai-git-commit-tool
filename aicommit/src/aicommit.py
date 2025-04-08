@@ -1,8 +1,8 @@
 import subprocess
 import openai
 
-from aicommit.src.commit_impact_report import impact_report
-from aicommit.src.pr_description_gen import generate_description
+from .commit_impact_report import impact_report
+from .pr_description_gen import generate_description
 from .utils import generate_commit_messages, get_diff
 from dotenv import load_dotenv
 import os
