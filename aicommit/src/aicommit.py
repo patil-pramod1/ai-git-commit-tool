@@ -1,6 +1,5 @@
 import subprocess
 import openai
-
 from .commit_impact_report import impact_report
 from .pr_description_gen import generate_description
 from .utils import generate_commit_messages, get_diff
@@ -36,6 +35,12 @@ def check_for_merge_conflicts():
             print("Merge conflicts detected in the following files:")
             for file in conflicting_files:
                 print(f"- {file}")
+            
+            # Pull the latest changes to resolve conflicts automatically
+            print("\nAttempting to resolve conflicts by pulling the latest changes...")
+            subprocess.run(["git", "pull", "origin", "master"], check=True)
+            print("Merge conflicts resolved. Proceeding with commit generation.")
+            
             return True, conflicting_files  # Conflicts found, return files involved
         else:
             print("No conflicts detected.")
@@ -53,7 +58,6 @@ def main():
     
     if conflicts:
         print("Please resolve the conflicts before proceeding with the commit.")
-        # Optionally, you could also prompt the user here to resolve conflicts manually
         return  # Exit if conflicts are detected
     
     # Get the git diff

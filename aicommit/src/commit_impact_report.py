@@ -34,14 +34,15 @@ def generate_impact_report(diff_text):
     prompt = f"""
 You're an expert code reviewer and software architect.
 
-Given the following `git diff` from a backend project, perform an **Impact Area Analysis Report**. Be highly specific and professional.
+Given the following git diff from a backend project, perform an Impact Area Analysis Report. Provide detailed analysis in a bullet point format, ensuring that each module lists its impacts as clear point-by-point statements. Only include points that are critical.
 
 Your report should include:
-- **APIs Affected**: List impacted endpoints or controller functions (e.g., GET /users, PUT /product/:id).
-- **Modules Changed**: Identify modules, services, DTOs, or helper files that were updated.
-- **Reasoning**: For each impact, explain how the change could affect functionality, performance, or security.
-- **Potential Risks**: Highlight anything that might break or needs careful testing.
-- **Suggested Tests**: Recommend test cases that should be added or rerun.
+- **APIs Affected**: 
+  - If any API changes are detected, list the impacted endpoints or controller functions (e.g., GET /users, PUT /product/:id) using bullet points.
+- **Modules Changed**: 
+  - Identify updated modules, services, DTOs, or helper files. For each, include only the important changes as individual bullet points.
+- **Reasoning**: 
+  - For each impacted module or API, provide concise bullet points explaining how the change could affect functionality, performance, or security.
 
 Use clear markdown-style formatting.
 

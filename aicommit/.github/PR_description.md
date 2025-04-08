@@ -1,14 +1,16 @@
 ### 📝 Description
-In this PR, I have implemented updates to the impact reporting functionality within the AI commit module. The changes include enhancements in the `commit_impact_report.py` logic and modifications to the impact report documentation. This aims to improve the clarity and effectiveness of the reports generated, ensuring that users can better understand the implications of their commits.
+In this PR, I added new documentation files and updated the existing codebase to improve clarity and functionality in the commit impact reporting system. The following areas were impacted:
 
 ### 📁 Files Changed
-- **aicommit/.github/IMPACT_REPORT.md**: Updated the documentation to reflect the latest changes in the report structure and added examples for better user guidance.
-- **aicommit/src/commit_impact_report.py**: Modified the core logic of the impact report generation to enhance accuracy and efficiency in reporting.
+- `aicommit/.github/IMPACT_REPORT.md`: A new markdown file was added to provide a structured template for impact reports.
+- `aicommit/.github/PR_description.md`: A new markdown file was created to standardize PR descriptions and maintain consistency across the repository.
+- `aicommit/src/commit_impact_report.py`: This file was modified to enhance the logic for generating impact reports, ensuring that the output is clearer and more informative.
+- `aicommit/src/test.py`: Tests were updated to reflect the changes made in `commit_impact_report.py`, ensuring that all functionalities are covered.
 
 ### 🛠️ Impact Areas
-The changes primarily affect the functionality of the commit impact reporting module. The updates in `commit_impact_report.py` improve how the impact of commits is evaluated and presented, while the documentation updates ensure that users have access to the most current information and examples for utilizing this functionality.
+The changes primarily impact the commit impact reporting system and the testing framework. The introduction of new documentation will help contributors understand how to write effective impact reports and PR descriptions. Moreover, enhancements to the logic in `commit_impact_report.py` will result in better reporting accuracy, which is crucial for project maintainability.
 
 ### ✅ Summary of Changes
-- Improved the logic in `commit_impact_report.py` to enhance the accuracy of impact assessments.
-- Updated `IMPACT_REPORT.md` with new examples and clearer explanations of report outputs.
-- Enhanced overall readability and usability of the impact report for better user experience.
+- Added `IMPACT_REPORT.md` and `PR_description.md` for improved documentation practices.
+- Updated `commit_impact_report.py` to refine the report generation logic and improve clarity.
+- Modified `test.py` to ensure that the tests align with the new functionalities and documentation standards.
