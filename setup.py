@@ -1,23 +1,21 @@
 import os
 import re
-
 from setuptools import setup, find_packages
 
 def get_version(package):
-    """
-    Return package version as listed in `__version__` in `__init__.py`.
-    """
     path = os.path.join(package, "__init__.py")
-    init_py = open(path, "r", encoding="utf8").read()
+    with open(path, "r", encoding="utf8") as f:
+        init_py = f.read()
     return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
 
 setup(
     name="aicommit",
-    version=get_version("src"),
+    version=get_version("aicommit/src"),  # <-- updated path
     description="An AI-powered git commit message generator!",
     long_description="AI-powered git commit message generator.",
     long_description_content_type="text/markdown",
-    packages=["src"],
+    packages=find_packages(where="aicommit"),  # <-- look inside aicommit/
+    package_dir={"": "aicommit"},              # <-- base package dir
     python_requires=">=3.7",
     include_package_data=True,
     install_requires=[
