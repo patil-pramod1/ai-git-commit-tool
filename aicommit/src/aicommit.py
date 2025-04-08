@@ -52,11 +52,12 @@ def main():
         # Confirm the commit
         confirmation = input("\nWould you like to use this commit message? (y/n): ").lower()
         if confirmation == 'y':
+            # generate_description()
             subprocess.run(["git", "commit", "-m", selected_message])
             print("Changes committed!")
-            print('Start generating PR description...')
-            generate_description()
-            print('PR description generated successfully!')
+            # print('Start generating PR description...')
+            # generate_description()
+            # print('PR description generated successfully!')
 
 
         else:

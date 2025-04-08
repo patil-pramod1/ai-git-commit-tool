@@ -72,27 +72,10 @@ PR Description:
         print("Error from Azure OpenAI API:", response.status_code, response.text)
         return ""
 
-def generate_description():
-    if not OPENAI_API_KEY:
-        print("❌ AZURE_API_KEY not found in environment or .env file.")
-        exit(1)
-
-    print("🔍 Fetching latest commit changes...")
-    diff = get_latest_commit_diff()
-
-    if not diff:
-        print("⚠️ No changes found in the latest commit.")
-        exit(0)
-
+# pr_description_gen.py
+def generate_description_from_diff(diff_text):
+    """Same logic, but takes diff as input instead of calling git."""
     print("🤖 Generating PR description using GPT-4o-mini...")
-    description = generate_pr_description(diff)
-    # print("\n--- 📝 Generated PR Description ---\n")
-    # print(description)
-
-    # ✅ Save to .github/PR_description.md
-    os.makedirs(".github", exist_ok=True)
-    with open(".github/PR_description.md", "w", encoding="utf-8") as f:
-        f.write(description)
-
-    print("\n💾 PR description saved to `.github/PR_description.md`")
+    description = generate_pr_description(diff_text)
+    return description
 
