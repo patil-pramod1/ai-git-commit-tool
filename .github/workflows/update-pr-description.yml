@@ -1,0 +1,34 @@
+name: Update PR Description Automatically
+
+on:
+  pull_request:
+    types: [opened, synchronize,edited] # Trigger on PR opened, synchronized (new commits), or edited
+
+permissions:
+  pull-requests: write # Needed to update the PR description
+
+jobs:
+  generate-pr-description:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install requests python-dotenv
+
+      - name: 🤖 Generate and update PR description
+        env:
+          OPENAI_API_KEY: ${{ secrets.AZURE_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python .github/update_pr_description.py
