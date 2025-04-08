@@ -24,7 +24,7 @@ def check_for_merge_conflicts():
         
         # Check for conflicts using `git diff --name-only --diff-filter=U`
         result = subprocess.run(
-            ["git", "diff", "--name-only", "--diff-filter=U"],
+            ["git", "diff", "--name-only", "--diff-filter=U", "origin/test"],
             capture_output=True, text=True, check=True
         )
 
