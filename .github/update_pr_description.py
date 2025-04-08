@@ -1,7 +1,7 @@
 # update_pr_description.py
 import os
 import requests
-from pr_description_gen import generate_description_from_diff
+from pr_description_gen import get_latest_commit_diff
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 PR_NUMBER = os.getenv("PR_NUMBER")
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     diff = get_pr_diff(PR_NUMBER, REPO)
     if diff:
-        description = generate_description_from_diff(diff)
+        description = get_latest_commit_diff(diff)
 
         if not description.strip():
             print("❌ Generated description is empty.")

@@ -30,22 +30,39 @@ def get_latest_commit_diff():
         return ""
 
 def generate_pr_description(diff_text):
-    """Generate PR description using Azure OpenAI."""
+    """Generate structured PR description using Azure OpenAI."""
     prompt = f"""
-You're an AI assistant that generates GitHub Pull Request descriptions.
+You are an expert AI assistant that writes professional and structured GitHub Pull Request descriptions.
 
-Based on the following file changes from a commit:
+You are comparing the current branch against the master branch. Based on the following git diff output, generate a PR description that:
+
+- Clearly explains what was changed and why.
+- Mentions **files changed**.
+- Highlights **impacted areas or modules**.
+- Groups changes by purpose (e.g., bug fix, refactor, optimization).
+- Uses markdown formatting (e.g., bullet points, bold headers).
+- Follows the below structure:
+
+### 📝 Description
+In this PR, I [describe the main issue addressed or feature added]. The following areas were impacted:
+
+### 📁 Files Changed
+List the major files or modules that were changed and explain briefly why.
+
+### 🛠️ Impact Areas
+Explain which functionalities, APIs, or modules were affected by the changes and why.
+
+### ✅ Summary of Changes
+- [Bullet 1: Describe a fix, rename, or optimization]
+- [Bullet 2: Summarize a file refactor, logic update, or cleanup]
+- [Bullet 3: Any performance or readability improvements]
+
+Git Diff to Analyze:
 
 {diff_text}
 
-Write a clear, concise, and professional PR description that:
-- Explains the purpose of the changes.
-- Summarizes major additions/removals/updates.
-- Highlights any bug fixes, features, or refactors.
-- Uses bullet points and markdown formatting if helpful.
-- Avoids unnecessary repetition of file names.
 
-PR Description:
+Now write the PR description following the structure above.
 """
 
     payload = {
@@ -72,10 +89,26 @@ PR Description:
         print("Error from Azure OpenAI API:", response.status_code, response.text)
         return ""
 
-# pr_description_gen.py
-def generate_description_from_diff(diff_text):
-    """Same logic, but takes diff as input instead of calling git."""
-    print("🤖 Generating PR description using GPT-4o-mini...")
-    description = generate_pr_description(diff_text)
-    return description
+def generate_description():
+    if not OPENAI_API_KEY:
+        print("❌ AZURE_API_KEY not found in environment or .env file.")
+        exit(1)
 
+    print("🔍 Fetching latest commit changes...")
+    diff = get_latest_commit_diff()
+
+    if not diff:
+        print("⚠️ No changes found in the latest commit.")
+        exit(0)
+
+    print("🤖 Generating PR description using GPT-4o-mini...")
+    description = generate_pr_description(diff)
+    # print("\n--- 📝 Generated PR Description ---\n")
+    # print(description)
+
+    # ✅ Save to .github/PR_description.md
+    os.makedirs(".github", exist_ok=True)
+    with open(".github/PR_description.md", "w", encoding="utf-8") as f:
+        f.write(description)
+
+    print("\n💾 PR description saved to .github/PR_description.md")
