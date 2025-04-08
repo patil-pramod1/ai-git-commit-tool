@@ -1,6 +1,21 @@
 import subprocess
 import openai
 from openai import AzureOpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load environment variables from .env file
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+
+
+def generate_conflict_resolution_suggestions(api_key, conflict_code):
+    """
+    Generate suggestions for resolving a merge conflict.
+    """
+    prompt = f"Resolve the following conflict in the code:\n{conflict_code}\n\nProvide a suggestion to resolve this conflict."
+    suggestions = generate_commit_messages(api_key, prompt, num_messages=3)
+    return suggestions
+
 
 def generate_commit_messages(
     api_key: str, prompt: str, language: str = "english", num_messages: int = 5
