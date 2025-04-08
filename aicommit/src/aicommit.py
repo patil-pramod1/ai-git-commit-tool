@@ -1,6 +1,6 @@
 import subprocess
 import openai
-from .commit_impact_report import commit_impact_report
+from .commit_impact_report import commit_impact_report,generate_impact_report
 from .utils import generate_commit_messages, get_diff
 from dotenv import load_dotenv
 import os
@@ -95,6 +95,7 @@ def main():
         subprocess.run(["git", "commit", "-m", selected_message])
         print("Changes committed!")
         commit_impact_report()
+        generate_impact_report(diff)
        
     else:
         print("Commit message was not used.")
