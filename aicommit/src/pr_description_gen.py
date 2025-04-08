@@ -33,38 +33,36 @@ def get_branch_diff_against_master():
 def generate_pr_description(diff_text):
     """Generate structured PR description using Azure OpenAI."""
     prompt = f"""
-You are an expert AI assistant that writes professional and structured GitHub Pull Request descriptions.
+    You are an expert AI assistant that writes professional and structured GitHub Pull Request descriptions.
 
-You are comparing the current branch against the `master` branch. Based on the following git diff output, generate a PR description that:
+    Analyze the following git diff between the current branch and the master branch. Generate a PR description that:
+    - Provides a clear explanation of the changes and their purpose.
+    - In the "Files Changed" section, only list the file names.
+    - In the "Impact Areas" section, mention the affected modules or functionalities in exactly 10-20 words.
+    - In the "Summary of Changes" section, include properly formatted bullet points explaining the fixes or improvements.
 
-- Clearly explains what was changed and why.
-- Mentions **files changed**.
-- Highlights **impacted areas or modules**.
-- Groups changes by purpose (e.g., bug fix, refactor, optimization).
-- Uses markdown formatting (e.g., bullet points, bold headers).
-- Follows the below structure:
+    Follow this structure exactly:
 
-### 📝 Description
-In this PR, I [describe the main issue addressed or feature added]. The following areas were impacted:
+    ### 📝 Description
+    Provide a precise explanation of the main issue addressed or feature implemented.
 
-### 📁 Files Changed
-List the major files or modules that were changed and explain briefly why.
+    ### 📁 Files Changed
+    List only the file names that were changed.
 
-### 🛠️ Impact Areas
-Explain which functionalities, APIs, or modules were affected by the changes and why.
+    ### 🛠️ Impact Areas
+    Describe the impacted areas in exactly 10-20 words.
 
-### ✅ Summary of Changes
-- [Bullet 1: Describe a fix, rename, or optimization]
-- [Bullet 2: Summarize a file refactor, logic update, or cleanup]
-- [Bullet 3: Any performance or readability improvements]
+    ### ✅ Summary of Changes
+    - [Bullet 1: Provide a clear and concise description]
+    - [Bullet 2: Summarize additional improvements]
+    - [Bullet 3: Mention any performance or readability enhancements]
 
-Git Diff to Analyze:
+    Analyze the git diff below:
 
-{diff_text}
+    {diff_text}
 
-
-Now write the PR description following the structure above.
-"""
+    Now generate the PR description following the instructions above.
+    """
 
     payload = {
         "messages": [
