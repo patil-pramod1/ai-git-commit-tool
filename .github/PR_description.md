@@ -1,16 +1,18 @@
 ### 📝 Description
-In this PR, I added two new search algorithms, binary search and linear search, to improve our data retrieval capabilities. These implementations will allow our users to choose the most efficient search method based on their data characteristics. 
+In this PR, I added new search algorithms and improved the impact reporting functionality. The changes enhance our codebase by introducing efficient search methods and refining how we generate impact reports for commits. The following areas were impacted:
 
 ### 📁 Files Changed
-- **`project/binary_search.py`**: This file contains the implementation of the binary search algorithm, which is efficient for sorted datasets.
-- **`project/linear_search.py`**: This file includes the linear search algorithm, suitable for unsorted datasets or when performance is not a critical factor.
+- **`.github/IMPACT_REPORT.md`**: Added documentation for the impact report format and usage.
+- **`.github/PR_description.md`**: Introduced a template for pull request descriptions to standardize contributions.
+- **`aicommit/src/commit_impact_report.py`**: Modified the impact report logic to accommodate new features and ensure accurate reporting.
+- **`project/binary_search.py`**: Implemented the binary search algorithm to improve search efficiency.
+- **`project/linear_search.py`**: Added the linear search algorithm as a straightforward alternative for educational purposes.
 
 ### 🛠️ Impact Areas
-The addition of these search algorithms impacts the following functionalities:
-- **Searching Mechanisms**: Users can now utilize both binary and linear search methods, enhancing the flexibility and effectiveness of our search functionalities.
-- **Performance Optimization**: The binary search implementation is expected to significantly improve search performance on sorted data, making it a valuable addition for users dealing with large datasets.
+The changes primarily impact the search functionalities within the `project` module and the commit impact reporting in the `aicommit` module. The new search algorithms provide developers with more efficient options for data retrieval, while the updates to the impact report enhance our ability to track changes and understand the effects of commits on the project.
 
 ### ✅ Summary of Changes
-- **Added Binary Search**: Introduced an efficient binary search algorithm in `binary_search.py`, which operates in O(log n) time complexity for sorted lists.
-- **Added Linear Search**: Implemented a straightforward linear search algorithm in `linear_search.py`, which operates in O(n) time complexity, providing a fallback option for unsorted data.
-- **Enhanced Search Capabilities**: These additions provide users with more tools to optimize their data retrieval processes, improving overall application performance and usability.
+- **Added** the binary search algorithm to improve search efficiency in sorted datasets.
+- **Introduced** a linear search algorithm for basic use cases and educational purposes.
+- **Updated** the impact report generation logic to reflect the new search functionalities and improve clarity in reporting. 
+- **Created** documentation files to guide users on the usage of the impact report and PR description templates.

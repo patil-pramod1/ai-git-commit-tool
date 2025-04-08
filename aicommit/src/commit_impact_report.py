@@ -60,21 +60,34 @@ def upload_excel_file(access_token, file_content):
 
 
 def append_to_excel_onedrive(date, username, commit_message, impact_summary):
-    access_token = get_access_token()
-    file_stream = download_excel_file(access_token)
-
-    if file_stream:
-        workbook = load_workbook(file_stream)
+    # Original OneDrive implementation (to be implemented later):
+    # access_token = get_access_token()
+    # file_stream = download_excel_file(access_token)
+    #
+    # if file_stream:
+    #     workbook = load_workbook(file_stream)
+    # else:
+    #     workbook = Workbook()
+    #     workbook.active.append(["Date", "GitHub Username", "Commit Message", "Impacted Modules Summary"])
+    #
+    # sheet = workbook.active
+    # sheet.append([date, username, commit_message, impact_summary])
+    #
+    # output_stream = BytesIO()
+    # workbook.save(output_stream)
+    # upload_excel_file(access_token, output_stream.getvalue())
+    
+    # Local Excel file implementation in the .github folder:
+    local_excel_path = ".github/PR_Report.xlsx"
+    if os.path.exists(local_excel_path):
+        workbook = load_workbook(local_excel_path)
     else:
         workbook = Workbook()
         workbook.active.append(["Date", "GitHub Username", "Commit Message", "Impacted Modules Summary"])
-
+    
     sheet = workbook.active
     sheet.append([date, username, commit_message, impact_summary])
-
-    output_stream = BytesIO()
-    workbook.save(output_stream)
-    upload_excel_file(access_token, output_stream.getvalue())
+    workbook.save(local_excel_path)
 
 
 def get_commit_diff():
