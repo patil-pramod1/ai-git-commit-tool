@@ -110,6 +110,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# GitHub metadata
+.github/
+
+# Google Cloud credentials
+.google_credentials.json
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -131,3 +137,6 @@ dmypy.json
 .vscode/
 tests/
 test.yml
+
+# Ignore Google credentials
+**/google_credentials.json
